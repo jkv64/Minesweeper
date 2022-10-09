@@ -2,10 +2,6 @@
 Welcome to Minesweeper, coded in C++ on Visual Studio 2019! Sorry, the code is a little
 messy; hopefully I explained it enough.
 
-For AP CS Principles grading, block comments and line comments on their own line are my explanations of
-what the following lines of code do. Line comments on a line of code with "!!!!" at the beginning indicate
-where I believe I fulfilled one of the submission requirements.
-
 My program includes several external libraries developed by other people, most noteably SFML,
 which is use for the GUI (all credit for the SMFL library goes to the devs at https://www.sfml-dev.org/).
 All five of the SFML libraries and includes (audio, graphics, network, system, and window) are added to
