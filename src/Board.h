@@ -30,6 +30,7 @@ public:
     bool isFlagged(int x, int y) const;
     int getNumberAt(int x, int y) const;
     int getDimension() const;
+    int getNumRevealed() const;
 
     // Friend declaration to allow GUI to access board data
     friend class GUI;
@@ -39,4 +40,5 @@ private:
     std::vector<std::pair<int, int>> m_minePositions;
     int m_dimension;
     int m_numMines;
+    int m_numRevealed;
 };

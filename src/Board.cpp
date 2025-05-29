@@ -5,7 +5,8 @@
 
 Board::Board(const int dimension, const int numMines)
     : m_dimension(dimension),
-      m_numMines(numMines) {
+      m_numMines(numMines),
+      m_numRevealed(0) {
 
     // Initialize the board with empty cells
     m_cells.resize(dimension, std::vector<Cell>(dimension));
@@ -85,6 +86,7 @@ void Board::reveal(const int x, const int y) {
 
     // Reveal the cell
     m_cells[x][y].isRevealed = true;
+    m_numRevealed++;
 
     // If it's a cell with no adjacent mines, reveal all neighbors (flood fill)
     if (m_cells[x][y].adjacentMines == 0 && !m_cells[x][y].isMine) {
@@ -139,4 +141,8 @@ int Board::getNumberAt(const int x, const int y) const {
 
 int Board::getDimension() const {
     return m_dimension;
+}
+
+int Board::getNumRevealed() const {
+    return m_numRevealed;
 }

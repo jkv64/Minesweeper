@@ -7,7 +7,8 @@ MinesweeperGame::MinesweeperGame()
       m_gui(DIMENSION),
       m_firstClick(true),
       m_gameOver(false),
-      m_isRunning(true) {
+      m_isRunning(true)
+    {
 }
 
 MinesweeperGame::~MinesweeperGame() = default;
@@ -66,7 +67,14 @@ void MinesweeperGame::handleLeftClick(const int x, const int y) {
     else {
         // Reveal the clicked cell and potentially its neighbors
         m_board.reveal(x, y);
+        checkWin();
         m_gui.updateBoardDisplay(m_board);
+    }
+}
+
+void MinesweeperGame::checkWin() {
+    if (m_board.getNumRevealed() == (DIMENSION * DIMENSION - NUM_MINES)) {
+        m_gameOver = true;
     }
 }
 

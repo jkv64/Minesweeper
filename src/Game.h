@@ -18,6 +18,7 @@ private:
     void render();
     void handleLeftClick(int x, int y);
     void handleRightClick(int x, int y);
+    void checkWin();
 
     Board m_board;
     GUI m_gui;
