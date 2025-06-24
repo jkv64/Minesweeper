@@ -26,12 +26,16 @@ void MinesweeperGame::handleEvents() {
         if (event->is<sf::Event::Closed>()) {
             m_gui.closeWindow();
             m_isRunning = false;
-        }
-        else if (const auto* mouseButton = event->getIf<sf::Event::MouseButtonPressed>()) {
-            // Get board coordinates from mouse position
-            const int i = mouseButton->position.x / (CELL_SIZE + CELL_SPACING);
-            const int j = (mouseButton->position.y - TIMER_HEIGHT) / (CELL_SIZE + CELL_SPACING);
-
+        } else if (const auto* resized = event->getIf<sf::Event::Resized>()) {
+            // Handle window resize event by notifying GUI
+            // Important: Allows dynamic adjustment of visuals without affecting game state
+            m_gui.handleResize(resized->size.x, resized->size.y);
+        } else if (const auto* mouseButton = event->getIf<sf::Event::MouseButtonPressed>()) {
+            // Updated to use dynamic cell size for coordinate calculation
+            // Important: Ensures click handling works after window resizing
+            const float cellSizeWithSpacing = m_gui.getCellSizeWithSpacing();
+            const int i = static_cast<int>(mouseButton->position.x / cellSizeWithSpacing);
+            const int j = static_cast<int>((mouseButton->position.y - TIMER_HEIGHT) / cellSizeWithSpacing);
             // Check if click is within board bounds
             if (!m_gameOver && i >= 0 && i < DIMENSION && j >= 0 && j < DIMENSION) {
                 if (mouseButton->button == sf::Mouse::Button::Left) {
